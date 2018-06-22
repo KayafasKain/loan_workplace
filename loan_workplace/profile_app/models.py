@@ -5,10 +5,10 @@ class Profile(models.Model):
     income_yearly = models.FloatField()
     employer_name = models.CharField(max_length=64)
     birth_date = models.DateField()
-    last_loan_taken = models.DateField()
-    last_loan_paid = models.DateField()
-    profile_updated = models.DateField()
-    emplyment_type = models.ForeignKey('EmploymentType', null=True, on_delete=models.SET_NULL)
+    last_loan_taken = models.DateField(blank=True)
+    last_loan_paid = models.DateField(blank=True)
+    profile_updated = models.DateTimeField(auto_now_add=True)
+    employment_type = models.ForeignKey('EmploymentType', null=True, on_delete=models.SET_NULL)
     client_class = models.ForeignKey('ClientClass', null=True, on_delete=models.SET_NULL)
 
 class Contact(models.Model):
