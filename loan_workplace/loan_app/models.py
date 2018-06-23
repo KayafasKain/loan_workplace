@@ -4,8 +4,8 @@ from django.db import models
 
 class Loan(models.Model):
     amount = models.FloatField()
-    given = models.DateField()
-    closed = models.DateField()
+    given = models.DateTimeField(auto_now_add=True)
+    closed = models.DateField(null=True, default=None)
     is_outdated = models.BooleanField(default=False)
     expected_payment = models.FloatField()
     type = models.ForeignKey('LoanType', null=True, on_delete=models.SET_NULL)
@@ -17,6 +17,7 @@ class LoanType(models.Model):
     description = models.CharField(max_length=256)
     interest = models.FloatField()
     penalty = models.FloatField
+    client_classes = models.ManyToManyField('profile_app.ClientClass')
 
 class Status(models.Model):
     name = models.CharField(max_length=32, unique=True)

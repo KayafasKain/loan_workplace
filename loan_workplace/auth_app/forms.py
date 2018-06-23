@@ -36,9 +36,7 @@ class ProfileRegisterForm(forms.ModelForm):
             'income_yearly',
             'employer_name',
             'birth_date',
-            'last_loan_paid',
-            'client_class',
-            'employment_type'
+            'employment_type',
         ]
 
 class UserRegisterForm(forms.ModelForm):

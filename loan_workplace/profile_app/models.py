@@ -1,6 +1,10 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth import (
+    get_user_model
+)
 
+User = get_user_model()
 class Profile(models.Model):
     income_yearly = models.FloatField()
     employer_name = models.CharField(max_length=64)
@@ -10,6 +14,7 @@ class Profile(models.Model):
     profile_updated = models.DateTimeField(auto_now_add=True)
     employment_type = models.ForeignKey('EmploymentType', null=True, on_delete=models.SET_NULL)
     client_class = models.ForeignKey('ClientClass', null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
 class Contact(models.Model):
     name = models.CharField(max_length=32)
