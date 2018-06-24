@@ -10,6 +10,7 @@ from django.shortcuts import redirect
 from django.views.generic.edit import FormView
 from .forms import UserRegisterForm, UserLoginForm, ProfileRegisterForm
 from django.apps import apps
+from .utils.classifiers.numerical_classifier import NumericalClassifier as NC
 
 Profile = apps.get_model('profile_app', 'Profile')
 ClientClass = apps.get_model('profile_app', 'ClientClass')
@@ -21,6 +22,11 @@ class LoginView(FormView):
     form_class = UserLoginForm
     context_object_name = 'login'
     success_url = '/'
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        new_user = authenticate(username=user.username, password=password)
+        login(request, new_user)
 
 login = LoginView.as_view()
 
@@ -55,9 +61,9 @@ class CreateProfileView(FormView): #Work In Progress
             profile = self.model.objects.get(user=self.kwargs['pk'])
         except self.model.DoesNotExist as e:
             profile = form.save()
-
+        clas = NC(profile)
         profile.user = self.user_model.objects.get(pk=self.kwargs['pk'])
-        profile.client_class = self.class_model.objects.get(pk=1)#mock classification
+        profile.client_class = clas.get_user_class()
         profile.save()
         return redirect('/')
 

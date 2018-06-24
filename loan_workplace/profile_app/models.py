@@ -24,8 +24,10 @@ class Contact(models.Model):
 class EmploymentType(models.Model):
     name = models.CharField(max_length=64, unique=True)
     descriptinon = models.CharField(max_length=128)
+    value = models.FloatField(default=0)
 
 class ClientClass(models.Model):
     name = models.CharField(max_length=64, unique=True)
     descriptinon = models.CharField(max_length=128)
+    weight = models.FloatField(default=100)
 
