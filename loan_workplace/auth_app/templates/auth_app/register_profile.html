@@ -1,7 +1,8 @@
 {% extends "auth_app/base.html" %}
-{% block title %} Register {% endblock %}
-{% block register %}
-    <form action="{% url 'register' %}" method="POST">
+{% block title %} Create profile {% endblock %}
+
+{% block register-profile %}
+    <form action="" method="POST">
         {% csrf_token %}
         {% for field in form%}
             <div class="wrapper">

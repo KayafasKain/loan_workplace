@@ -20,5 +20,6 @@ from auth_app import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', auth_views.register, name='register'),
+    path('create_profile/<str:pk>', auth_views.create_profile, name = 'register-profile'),
     path('login/', auth_views.login, name='login')
 ]
