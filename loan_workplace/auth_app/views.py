@@ -35,6 +35,9 @@ class RegisterView(FormView):
             user = self.model.objects.get(email=form.cleaned_data['email'])
         except self.model.DoesNotExist as e:
             user = form.save()
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+
         return HttpResponseRedirect(reverse('register-profile', kwargs={'pk': str(user.pk)}))
 
 register = RegisterView.as_view()
