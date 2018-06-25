@@ -50,8 +50,10 @@ class UserLoginForm(forms.ModelForm):
                 })
 
 
+BIRTH_YEAR_CHOICES = ( i for i in range(1900, 2000) )
 
 class ProfileRegisterForm(forms.ModelForm):
+    birth_date = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
     class Meta:
         model = Profile
         fields = [

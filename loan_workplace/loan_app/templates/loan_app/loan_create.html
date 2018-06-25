@@ -1,24 +1,10 @@
-{% extends "auth_app/base.html" %}
-{% block title %} Register {% endblock %}
+{% extends "loan_app/base.html" %}
+{% block title %} Take a loan{% endblock %}
 
-{% block register %}
+{% block create_loan %}
     <form action="" method="POST">
         {% csrf_token %}
         {% for field in form%}
-            <div class="wrapper">
-                {{field.label_tag}}
-                {{field}}
-                <ul class="smth">
-                    {%for error in field.errors%}
-                        <li class="smth2">
-                            {{error|escape}}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endfor %}
-        <hr>
-        {% for field in profile_form%}
             <div class="wrapper">
                 {{field.label_tag}}
                 {{field}}

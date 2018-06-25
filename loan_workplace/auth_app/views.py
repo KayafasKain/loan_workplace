@@ -21,14 +21,17 @@ class LoginView(FormView):
     template_name = 'auth_app/login.html'
     form_class = UserLoginForm
     context_object_name = 'login'
-    success_url = '/'
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        new_user = authenticate(username=user.username, password=password)
-        login(request, new_user)
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate( self.request, username=username, password=password)
+        if user is not None:
+            login(self.request, user)#something wrong here
+            return HttpResponseRedirect(reverse('create-loan'))
+        redirect('/')
 
-login = LoginView.as_view()
+login_view = LoginView.as_view()
 
 class RegisterView(FormView):
     template_name = 'auth_app/register.html'

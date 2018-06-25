@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from auth_app import views as auth_views
+from loan_app import views as loan_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', auth_views.register, name='register'),
+    path('loan/take/', loan_views.take_loan, name='create-loan'),
     path('create_profile/<str:pk>', auth_views.create_profile, name = 'register-profile'),
-    path('login/', auth_views.login, name='login')
+    path('login/', auth_views.login_view, name='login')
 ]

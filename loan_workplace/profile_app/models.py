@@ -21,13 +21,21 @@ class Contact(models.Model):
     value = models.CharField(max_length=64)
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return '{}'.format(self.name)
+
 class EmploymentType(models.Model):
     name = models.CharField(max_length=64, unique=True)
     descriptinon = models.CharField(max_length=128)
     value = models.FloatField(default=0)
+
+    def __str__(self):
+        return '{}'.format(self.name)
 
 class ClientClass(models.Model):
     name = models.CharField(max_length=64, unique=True)
     descriptinon = models.CharField(max_length=128)
     weight = models.FloatField(default=100)
 
+    def __str__(self):
+        return '{}'.format(self.name)
