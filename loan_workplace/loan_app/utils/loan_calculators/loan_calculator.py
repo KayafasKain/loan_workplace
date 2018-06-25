@@ -1,4 +1,7 @@
-import datetime
+from datetime import datetime
+from django.apps import apps
+
+LoanType = apps.get_model('loan_app', 'LoanType')
 
 class LoanCalculator:
 
@@ -15,6 +18,9 @@ class LoanCalculator:
 
 
     def calculate_expected_payment(self):
-        duration = self.start.datetime.now().date() - self.end
+        duration = self.end - self.start.date()
         duration = duration.days / 30
         return self.amount/duration
+
+    def calculate_interest(self):
+        return (self.amount/100) * self.type.interest

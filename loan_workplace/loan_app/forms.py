@@ -5,7 +5,7 @@ Loan = apps.get_model('loan_app', 'Loan')
 ClientClass = apps.get_model('profile_app', 'ClientClass')
 LoanType = apps.get_model('loan_app', 'LoanType')
 
-class CreateLoan(forms.ModelForm):
+class CreateLoanForm(forms.ModelForm):
     closed = forms.DateField(widget=forms.SelectDateWidget())
 
     class Meta:
@@ -18,5 +18,8 @@ class CreateLoan(forms.ModelForm):
 
     def __init__ (self, *args, **kwargs):
         profile = kwargs.pop("profile")
-        super(CreateLoan, self).__init__(*args, **kwargs)
+        super(CreateLoanForm, self).__init__(*args, **kwargs)
         self.fields["type"].queryset = LoanType.objects.filter(client_classes=profile.client_class)
+
+    def clean(self):
+        pass

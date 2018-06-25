@@ -5,9 +5,10 @@ from django.db import models
 class Loan(models.Model):
     amount = models.FloatField()
     given = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    closed = models.DateField(null=True, default=None)
+    closed = models.DateField(null=True, blank=True)
     is_outdated = models.BooleanField(default=False, blank=True)
     expected_payment = models.FloatField(null=True, blank=True)
+    pay_interest = models.FloatField(null=True, blank=True)
     type = models.ForeignKey('LoanType', null=True, blank=True, on_delete=models.SET_NULL)
     status = models.ForeignKey('Status', null=True, blank=True, on_delete=models.SET_NULL)
     profile = models.ForeignKey('profile_app.Profile', on_delete=models.CASCADE, null=True, blank=True)
