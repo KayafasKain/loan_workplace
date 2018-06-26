@@ -18,11 +18,13 @@ from django.urls import path
 from auth_app import views as auth_views
 from loan_app import views as loan_views
 from django.contrib.auth.decorators import login_required
-
+#loan_list
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', auth_views.register, name='register'),
     path('loan/take/', login_required(loan_views.take_loan), name='create-loan'),
+    path('loan/list/', login_required(loan_views.loan_list), name='loan-list'),
+    path('loan/pay/<str:pk>', login_required(loan_views.loan_pay), name='loan-pay'),
     path('create_profile/<str:pk>', auth_views.create_profile, name = 'register-profile'),
     path('login/', auth_views.login_view, name='login')
 ]

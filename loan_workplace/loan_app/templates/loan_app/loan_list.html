@@ -1,0 +1,22 @@
+{% extends "loan_app/base.html" %}
+{% block title %} Your loans{% endblock %}
+
+{% block body %}
+    <table>
+        {% for obj in object_list %}
+            <tr>
+                <th>{{ obj.amount }}</th>
+                <th>{{ obj.amount_remain }}</th>
+                <th>{{ obj.status }}</th>
+                <th>{{ obj.type }}</th>
+                <th>{{ obj.expected_payment }}</th>
+                <th>
+                    <form action="{% url 'loan-pay' pk=obj.pk %}">
+                        <input type="submit" name='Pay' >
+                    </form>
+                </th>
+            </tr>
+        {% endfor %}
+    </table>
+    {% include 'loan_app/pagination.html' %}
+{% endblock %}

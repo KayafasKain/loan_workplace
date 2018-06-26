@@ -4,6 +4,7 @@ from django.db import models
 
 class Loan(models.Model):
     amount = models.FloatField()
+    amount_remain = models.FloatField(null=True, blank=True)
     given = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     closed = models.DateField(null=True, blank=True)
     is_outdated = models.BooleanField(default=False, blank=True)
@@ -12,6 +13,7 @@ class Loan(models.Model):
     type = models.ForeignKey('LoanType', null=True, blank=True, on_delete=models.SET_NULL)
     status = models.ForeignKey('Status', null=True, blank=True, on_delete=models.SET_NULL)
     profile = models.ForeignKey('profile_app.Profile', on_delete=models.CASCADE, null=True, blank=True)
+
 
 class LoanType(models.Model):
     name = models.CharField(max_length=32, unique=True)
@@ -32,7 +34,7 @@ class Status(models.Model):
         return '{}'.format(self.name)
 
 class Payments(models.Model):
-    loan = models.ForeignKey('Loan', on_delete=models.CASCADE)
+    loan = models.ForeignKey('Loan', on_delete=models.CASCADE, null=True, blank=True)
     amount = models.FloatField()
     is_suffise = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now_add=True)
