@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'auth_app',
     'loan_app',
     'profile_app',
+    'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

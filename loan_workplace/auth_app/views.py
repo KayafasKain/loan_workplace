@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.views.generic.edit import FormView
+from django.views.generic import RedirectView
 from .forms import UserRegisterForm, UserLoginForm, ProfileRegisterForm
 from django.apps import apps
 from .utils.classifiers.numerical_classifier import NumericalClassifier as NC
@@ -32,6 +33,17 @@ class LoginView(FormView):
         redirect('/')
 
 login_view = LoginView.as_view()
+
+class MyLogoutView(RedirectView):
+    context_object_name = 'logout'
+    success_url = '/'
+
+    def get_redirect_url(self, *args, **kwargs):
+        logout(self.request)
+        return self.success_url
+
+logout_view = MyLogoutView.as_view()
+
 
 class RegisterView(FormView):
     template_name = 'auth_app/register.html'

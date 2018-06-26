@@ -12,7 +12,7 @@
                 <th>{{ obj.expected_payment }}</th>
                 <th>
                     <form action="{% url 'loan-pay' pk=obj.pk %}">
-                        <input type="submit" name='Pay' >
+                        <input type='submit' value='Pay' >
                     </form>
                 </th>
             </tr>
