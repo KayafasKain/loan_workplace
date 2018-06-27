@@ -77,12 +77,25 @@ WSGI_APPLICATION = 'loan_workplace.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'hrdgswoz',
+        'USER': 'hrdgswoz',
+        'PASSWORD': 'yz9iYM_QMKL4Pg1-B7PYn0cKkSxaesCp',
+        'HOST': 'horton.elephantsql.com',
+        'PORT': '5432',
     }
 }
+#DATABASES['default'] = 'postgres://hrdgswoz:yz9iYM_QMKL4Pg1-B7PYn0cKkSxaesCp@horton.elephantsql.com'
 
 
 # Password validation
@@ -122,3 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

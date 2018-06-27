@@ -3,6 +3,10 @@
 
 {% block body %}
     <table>
+    <tr>
+        <th>Amount</th> <th>Amount remain</th>
+        <th>Status</th><th>Type</th><th>Expected month payment</th>
+    </tr>
         {% for obj in object_list %}
             <tr>
                 <th>{{ obj.amount }}</th>
@@ -17,6 +21,9 @@
                 </th>
             </tr>
         {% endfor %}
+        {% if not object_list %}
+            <p>You have no loans taken</p>
+        {% endif %}
     </table>
     {% include 'loan_app/pagination.html' %}
 {% endblock %}
